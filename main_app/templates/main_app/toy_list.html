@@ -1,0 +1,19 @@
+{% extends 'main_app/base.html' %} {% block content %}
+
+<h1>Toy Index</h1>
+
+{% for toy in object_list %}
+
+<a href="{% url 'toy_detail' toy.id %}">
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title"
+        >A
+        <span style="color: {{toy.color.lower}}">{{toy.color}}</span>
+        {{toy.name}}</span
+      >
+    </div>
+  </div>
+</a>
+
+{% endfor %} {% endblock %}

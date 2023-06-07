@@ -52,6 +52,54 @@
   <!-- New Markup Above -->
 </div>
 
+<hr />
+
+<div class="row">
+  <div class="col s6">
+    <h3>{{finch.name}}'s Toys</h3>
+    {% if finch.toys.count %} {% for toy in finch.toys.all %}
+    <div class="card">
+      <div class="card-conent">
+        <span class="card-title">
+          A
+          <span class="{{toy.color.lower}}-text">{{toy.color}}</span>
+          {{toy.name}}
+        </span>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'unassoc_toy' finch.id toy.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Remove" class="btn red" />
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{finch.name}} doesn't have any toys 😿</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Available Toys</h3>
+    {% if toys.count %} {% for toy in toys %}
+    <div class="card">
+      <div class="card-conent">
+        <span class="card-title">
+          A
+          <span class="{{toy.color.lower}}-text">{{toy.color}}</span>
+          {{toy.name}}
+        </span>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'assoc_toy' finch.id toy.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Add" class="btn pink" />
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{finch.name}} Has All Toys Available</h5>
+    {% endif %}
+  </div>
+</div>
 <script>
   const dateEl = document.getElementById('id_date');
   // M is Materialize's global variable
