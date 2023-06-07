@@ -14,3 +14,8 @@ def about(request):
 def finch_index(request):
     finches = Finch.objects.all()
     return render(request, 'main_app/finches/index.html', {'finches': finches})
+
+
+def finches_detail(request, finch_id):
+    finch = Finch.objects.get(id=finch_id)
+    return render(request, "main_app/finches/detail.html", {'finch': finch})
